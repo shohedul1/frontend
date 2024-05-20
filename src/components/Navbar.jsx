@@ -22,6 +22,8 @@ const Navbar = () => {
         }
     }, [theme]);
 
+
+
     const [sticky, setSticky] = useState();
     useEffect(() => {
         const handleScroll = () => {
@@ -37,11 +39,16 @@ const Navbar = () => {
         }
     }, []);
 
+    const handleButtonClick = () => {
+        window.open('mailto:shohidulpramanik94@gmail.com');
+        window.location.reload();
+    };
+
     const navItems = (
         <>
             <li><Link to="/">Home</Link></li>
             <li><Link to={"/course"}>Course</Link></li>
-            <li><a href="">Contact</a></li>
+            <li><p  onClick={handleButtonClick}>Contact</p></li>
             <li><a href="">About</a></li>
         </>
     )
