@@ -1,11 +1,33 @@
+
+
 import { Link } from "react-router-dom";
-import list from "../../public/list.json";
 import Cards from "../components/Cards";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+
 
 const Course = () => {
-  console.log(list)
+  const [book, setBook] = useState([]);
+  useEffect(() => {
+    const getBook = async () => {
+      try {
+        const res = await axios.get("https://backend-ltqy.onrender.com/book");
+        // console.log(res.data);
+        setBook(res.data);
+
+      } catch (error) {
+        console.log(error)
+      }
+    };
+    getBook();
+
+  }, []);
+
+
+
   return (
-    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 ">
+    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
       <div className="mt-28 items-center justify-center text-center">
         <h1 className="text-2xl md:text-4xl">
           We&coppy;re delighted to have you {" "}
@@ -19,19 +41,15 @@ const Course = () => {
             Back
           </button>
         </Link>
-
       </div>
 
       <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-        {
-          list.map((item) => (
-            <Cards item={item} key={item.id} />
-          ))
-        }
+        {book.map((item) => (
+          <Cards item={item} key={item.id} />
+        ))}
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Course
+export default Course;

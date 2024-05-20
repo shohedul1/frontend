@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Login from './Login';
+import { useAuth } from '../context/AuthProvider';
+import Logout from './Logout';
 
 const Navbar = () => {
+    const [authUser, setAuhUser] = useAuth();
+
     const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
     const element = document.documentElement;
 
@@ -91,14 +95,22 @@ const Navbar = () => {
 
                             </label>
                         </div>
-                        <div className="">
-                            <a
-                            onClick={()=>document.getElementById("my_modal_3").showModal()}
-                                className="bg-black text-white p-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer">
-                                login
-                            </a>
-                            <Login/>
-                        </div>
+                        {
+                            authUser ? (
+                                <Logout />
+                            ) : (
+
+                                <div className="">
+                                    <a
+                                        onClick={() => document.getElementById("my_modal_3").showModal()}
+                                        className="bg-black text-white p-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer">
+                                        login
+                                    </a>
+                                    <Login />
+                                </div>
+                            )
+                        }
+
                     </div>
                 </div>
             </div>
