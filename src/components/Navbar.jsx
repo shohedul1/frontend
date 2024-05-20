@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Login from './Login';
 import { useAuth } from '../context/AuthProvider';
 import Logout from './Logout';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [authUser, setAuhUser] = useAuth();
@@ -38,8 +39,8 @@ const Navbar = () => {
 
     const navItems = (
         <>
-            <li><a href="/">Home</a></li>
-            <li><a href="/course">Course</a></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to={"/course"}>Course</Link></li>
             <li><a href="">Contact</a></li>
             <li><a href="">About</a></li>
         </>
